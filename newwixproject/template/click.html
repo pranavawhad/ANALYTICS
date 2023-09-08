@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User IP</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Page</th>
+                <th>Time</th>
+                <th>Event Type</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in clickhistory %}
+            <tr>
+                <td rowspan="{{ user.clickdata.count }}">{{ user.userip }}</td>
+                {% for entry in user.clickdata %}
+                <td>{{ entry.XC }}</td>
+                <td>{{ entry.YC }}</td>
+                <td>{{ entry.pageC }}</td>
+                <td>{{ entry.TimeC|date:"d F Y H:i:s" }}</td>
+                <td>{{ entry.typeC }}</td>
+                <td>{{ entry.LocationC }}</td>
+            </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hover History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User IP</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Page</th>
+                <th>Time</th>
+                <th>Event Type</th>
+                <th>Location</th>
+                <th>Attributes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in hoverhistory %}
+            <tr>
+                <td rowspan="{{ user.hoverdata.count }}">{{ user.userip }}</td>
+                {% for entry in user.hoverdata %}
+                <td>{{ entry.X }}</td>
+                <td>{{ entry.Y }}</td>
+                <td>{{ entry.page }}</td>
+                <td>{{ entry.Time |date:"d F Y H:i:s" }}</td>
+                <td>{{ entry.type }}</td>
+                <td>{{ entry.Location }}</td>
+                <td>{{ entry.Information }}</td>
+            </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

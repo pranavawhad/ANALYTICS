@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Access Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>App Access Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User IP</th>
+                <th>First Page</th>
+                <th>Other Pages</th>
+                <th>First Page Access Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_entry in user_data %}
+            <tr>
+                <td rowspan="{{ user_entry.visited.count }}">{{ user_entry.info.userIPAddress }}</td>
+                {% for visit in user_entry.visited %}
+                <td>{{ visit.First_Page }}</td>
+                <td>{{ visit.Other_Pages }}</td>
+                <td>{{ visit.FirstPageAccessTime|date:"d F Y H:i:s" }}</td>
+            </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
